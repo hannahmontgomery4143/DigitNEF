@@ -6,7 +6,6 @@ use helix_view::Theme;
 
 struct Rule {
     fg: Option<&'static str>,
-    bg: Option<&'static str>,
     check_both: bool,
 }
 
@@ -32,7 +31,6 @@ fn get_rules() -> Vec<Require> {
         Require::Existence(Rule::has_either("ui.statusline.normal")),
         Require::Existence(Rule::has_either("ui.statusline.insert")),
         Require::Existence(Rule::has_either("ui.statusline.select")),
-        Require::Difference("ui.statusline.normal", "ui.statusline.insert"),
         Require::Difference("ui.statusline.normal", "ui.statusline.select"),
         // Check for editor.cursorline
         Require::Existence(Rule::has_bg("ui.cursorline.primary")),
@@ -70,7 +68,6 @@ impl Rule {
             check_both: true,
         }
     }
-    fn has_either(item: &'static str) -> Rule {
         Rule {
             fg: Some(item),
             bg: Some(item),
